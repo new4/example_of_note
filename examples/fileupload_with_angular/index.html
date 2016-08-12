@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>upload_with_angular@new4 </title>
+    <link rel="stylesheet" href="styles/mystyle.css">
+    <!-- <script src="../../libs/jquery.js"></script> -->
+    <script src="../../libs/angular.js"></script>
+</head>
+<body ng-app="myApp">
+	<div class="container">
+		<div class="item">
+			<p>编码为 application/x-www-form-urlencoded 的情况</p>
+			<hr>
+			<form method="post" action="/" enctype="application/x-www-form-urlencoded">
+				<input type="text" name="name1" placeholder="name1">
+				<input type="text" name="name2" placeholder="name2">
+				<input type="submit">
+			</form>
+		</div>
+
+		<div class="item">
+			<p>编码为 multipart/form-data 的情况</p>
+			<hr>
+			<form method="post" action="/" enctype="multipart/form-data">
+			  <input type="text" name="name1" placeholder="name1">
+			  <input type="text" name="name2" placeholder="name2">
+			  <input type="file" name="inputfile">
+			  <input type="submit">
+			</form>
+		</div>
+
+		<div ng-controller="myController">
+			<div class="item">
+				<p>指令 file-model</p>
+				<hr>
+				<input type="file" file-model="fileToUpload">
+				<button type="button" ng-click="sendFile()">Submit</button>
+			</div>
+
+			<div class="item">
+				<p>指令 iframe-file-upload</p>
+				<hr>
+				<div iframe-file-upload></div>
+			</div>
+		</div>
+	</div>
+  <script src="js/myApp.js"></script>
+</body>
+</html>

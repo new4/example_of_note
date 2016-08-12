@@ -1,0 +1,12 @@
+body{
+	color: #333;
+}
+.container{
+	height: 600px;
+	width: 600px;
+	margin: 0px auto;
+	margin-top: 5px;
+}
+div.item{
+	padding: 20px 0px;
+}
