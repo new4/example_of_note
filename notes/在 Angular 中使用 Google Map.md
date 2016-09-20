@@ -92,8 +92,7 @@ ui-gmap-marker 指令主要的属性有：
 	<!-- server marker -->
 	<ui-gmap-marker coords="serverMarker.coords"
 									options="serverMarker.options"
-									idkey="serverMarker.id">
-	</ui-gmap-marker>
+									idkey="serverMarker.id"></ui-gmap-marker>
 ```
 
 在控制器的 js 文件中增加下面代码：
