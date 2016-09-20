@@ -78,15 +78,65 @@ angular.module( "myGMap", ['uiGmapgoogle-maps'] )
 
 ##### ui-gmap-marker
 ui-gmap-marker 指令主要的属性有：
-- idKey：用来避免重绘，必须是独一无二的值
+- idKey：marker 的标识
 - coords：用来指定 marker 标记的位置（经纬度坐标），包含有 latitude 和 longitude 两个属性的对象
 - click：指定点击 marker 标记时的处理函数
-- options：指令的配置项，详细选项可以看[这里](https://developers.google.com/maps/documentation/javascript/reference#MarkerOptions)
-- 
+- options：指令的配置项，详细选项可以参考[这里](https://developers.google.com/maps/documentation/javascript/reference#MarkerOptions) ，需要提醒的一个属性是 options.icon，我们可以利用这个属性来引入自己的 marker 图片
+- events：指定在 marker 上发生的事件及处理函数，关于 marker 标记的详细 events 可以看[这里](https://developers.google.com/maps/documentation/javascript/reference#Marker)
 
+那么在地图上显示服务器的代码可以这么写。
 
+在 index.html 中增加下面代码：
+
+```html
+	<!-- server marker -->
+	<ui-gmap-marker coords="serverMarker.coords"
+									options="serverMarker.options"
+									idkey="serverMarker.id">
+	</ui-gmap-marker>
+```
+
+在控制器的 js 文件中增加下面代码：
+
+```javascript
+	// server marker
+	$scope.serverMarker = {
+		id: 0,
+		coords: {
+			latitude: 41,
+			longitude: -74
+		},
+		options: {
+			// draggable: true,
+			// icon: "styles/img/server.png",
+			title: "SERVER"
+		}
+	};
+```
+
+可以看到地图上显示出一个 marker 标记，指示的是服务器的位置，由于我将 options.icon 设置为自己的图标，所以地图上显示的是我设定的图标。
 
 ##### ui-gmap-markers
+ui-gmap-markers 指令的主要属性有：
+- models：是一个数组，数组的项是要显示的 marker 标记的属性信息
+- coords：单个 marker 标记的位置信息
+- idkey：marker 的 id
+- icon：marker 所使用的 icon
+- options：marker 的选项属性
+- events：事件与事件处理函数
+
+上述的属性参考的值同 ui-gmap-marker 中的参考值一致，但是有一点需要注意的是：像 coords, icon, options 等属性可以设置成指定的单个 marker 标记的对应属性。
+也就是说，models 数组中的每一个 marker 标记都设置有 coords, icon, options 等属性，我们生成的时候可以通过在 coords, icon, options 等外面加上单引号 '' 来指定当生成这些 marker 的时候是从对应 marker 自己内部同名属性中取值。
+
+有点绕，依旧上代码。
+
+假设我们有两类的设备（假定为 deviceA 和 deviceB），那么我们可以对应生成两组标记（假定为 markersDeviceA 和 markersDeviceB ），根据 DRY 原则（偷懒原则）我们可以将生成两组标记的工作抽象成一个服务。
+
+代码如下：
+
+
+
+在 index.html 中添加上
 
 
 
