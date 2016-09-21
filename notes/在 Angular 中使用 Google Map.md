@@ -8,6 +8,8 @@
 
 我大部分的功能是基于指令 [`angular-google-maps`](https://github.com/angular-ui/angular-google-maps) 实现的，还有一部分的功能是直接使用 Google Maps API 实现，这里对最基本的实现过程做一个记录。
 
+本文代码示例可以在我的 [github](https://github.com/new4/example_of_note) 上找到，提醒一下代码中是不包含 API KEY 的（留给自己使用），需要诸君读完下面文章内容后自行申请一个 API KEY 并配置到代码中。
+
 ## 引入 Google Map
 ---
 
@@ -15,7 +17,7 @@
 
 要想使用 Google Map API 功能，首先需要到 [Google API Console](https://console.developers.google.com) 上注册一个 API KEY（翻墙）。
 
-方法时用你的 Google 账号登录到 [Google API Console](https://console.developers.google.com) 上，然后找到 google 地图 API 部分，选择其中的 Google Maps JavaScript API 项，创建一个秘钥，如下图：
+方法是用你的 Google 账号登录到 [Google API Console](https://console.developers.google.com) 上，然后找到 google 地图 API 部分，选择其中的 Google Maps JavaScript API 项，创建一个秘钥，如下图：
 
 ![选择 Google 地图 API 中的 Google Maps JavaScript API 项](http://upload-images.jianshu.io/upload_images/2601216-d679b8e867048119.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
@@ -63,7 +65,7 @@ angular.module( "myGMap", ['uiGmapgoogle-maps'] )
 
 现在地图就可以正常显示出来了：
 
-![正确显示的地图]()
+![正确显示的地图.png](http://upload-images.jianshu.io/upload_images/2601216-b73198d7d6376432.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 ### 使用 marker 和 markers 显示设备位置
 
@@ -110,7 +112,7 @@ angular.module( "myGMap", ['uiGmapgoogle-maps'] )
 
 可以看到地图上显示出一个 marker 标记，指示的是服务器的位置，由于我将 options.icon 设置为自己的图标，所以地图上显示的是我设定的图标。
 
-![ui-gmap-marker 标签生成单个服务器 marker 标记]
+![ui-gmap-marker 标签生成单个服务器 marker 标记.png](http://upload-images.jianshu.io/upload_images/2601216-4483e81f91030d00.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 ##### 指令 `ui-gmap-markers`
 `ui-gmap-markers` 指令的主要属性有：
@@ -202,7 +204,7 @@ for( var i = 0, len = data.length; i < len; i ++ ){
 
 刷新页面，就可以看到地图上出现了我们的设备：
 
-![ui-gmap-markers 标签生成不同种类的多个 marker 标记]
+![ui-gmap-markers 标签生成不同种类的多个 marker 标记.png](http://upload-images.jianshu.io/upload_images/2601216-1c785b2c0182d387.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 ### 使用 `ui-gmap-polyline` 绘制网络拓扑与设备状态
 
@@ -275,9 +277,35 @@ for( var i = 0, len = data.length; i < len; i ++ ){
 }
 ```
 
+在 `index.html` 中添加代码：
+
+```html
+<!-- device A lines -->
+<ui-gmap-polyline
+	ng-repeat="p in deviceALines.lines"
+	path="p.path"
+	stroke="p.stroke"
+	visible='p.visible'
+	geodesic='p.geodesic'
+	fit="p.fit"
+	editable="p.editable"
+	draggable="p.draggable"></ui-gmap-polyline>
+
+<!-- device B lines -->
+<ui-gmap-polyline
+	ng-repeat="p in deviceBLines.lines"
+	path="p.path"
+	stroke="p.stroke"
+	visible='p.visible'
+	geodesic='p.geodesic'
+	fit="p.fit"
+	editable="p.editable"
+	draggable="p.draggable"></ui-gmap-polyline>
+```
+
 刷新页面，就可以看到地图上在设备和服务器之间出现了连线，这些简单的连线表明了网络的拓扑结构，连线的颜色表示了设备是否处于被管理的状态。
 
-![`ui-gmap-polyline` 标签绘制网络拓扑]()
+![`ui-gmap-polyline` 标签绘制网络拓扑.png](http://upload-images.jianshu.io/upload_images/2601216-f166fed1e4f4afd8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 当然此处只是针对设备直连服务器这一最简单情况作的示例，在实际开发中更一般的情况还会包含有设备之间互连的情况，在这种情况下连线就会稍微复杂一点，此时可能需要根据当前设备的下游设备信息来绘制出整个网络的拓扑结构了。
 
@@ -383,7 +411,6 @@ $scope.map = {
 	}
 };
 ```
-
 `index.html` 中在 `ui-gmap-google-map` 指令中添加相应的属性 events：
 
 ```html
