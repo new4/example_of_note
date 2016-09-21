@@ -22,16 +22,40 @@
 			<ui-gmap-markers models="deviceAMarkers.markers"
 											 coords="'coords'"
 											 icon="'icon'"
-											 options="'options'"></ui-gmap-markers>
+											 options="'options'"
+											 events="deviceAMarkers.events"
+											 ></ui-gmap-markers>
 
 			<!-- device B markers -->
 			<ui-gmap-markers models="deviceBMarkers.markers"
 											 coords="'coords'"
 											 icon="'icon'"
-											 options="'options'"></ui-gmap-markers>
+											 options="'options'"
+											 events="deviceBMarkers.events"
+											 ></ui-gmap-markers>
+
+			<!-- device A lines -->
+			<ui-gmap-polyline ng-repeat="p in deviceALines.lines"
+												path="p.path"
+												stroke="p.stroke"
+												visible='p.visible'
+			                  geodesic='p.geodesic'
+			                  fit="p.fit"
+			                  editable="p.editable"
+			                  draggable="p.draggable"></ui-gmap-polyline>
+
+			<!-- device B lines -->
+			<ui-gmap-polyline ng-repeat="p in deviceBLines.lines"
+												path="p.path"
+												stroke="p.stroke"
+												visible='p.visible'
+			                  geodesic='p.geodesic'
+			                  fit="p.fit"
+			                  editable="p.editable"
+			                  draggable="p.draggable"></ui-gmap-polyline>
+
 
 		</ui-gmap-google-map>
-
 	</div>
 
   <script src="js/myApp.js"></script>
