@@ -24,7 +24,7 @@ angular.module("myGMap")
 				break;
 			case "deviceB":
 				marker.icon = icon.deviceB;
-				$scope.deviceAMarkers.markers.push( marker );
+				$scope.deviceBMarkers.markers.push( marker );
 				break;
 		}
   };
@@ -61,17 +61,32 @@ angular.module("myGMap")
   };
 
 	function getLineItemByDeviceID( lines, id ){
-		
+		var i = 0,
+				len = lines.length,
+				line;
+		for ( ; i < len; i ++ ){
+			line = lines[i];
+			if ( line.id === id ) return line;
+		}
+
 	}
 
 	function markersDragHandler(deviceType, marker, eventName, args){
 		var lines = $scope[ deviceType + "Lines"].lines;
+		var line = getLineItemByDeviceID( lines, marker.model.id );
+		if ( line ) line.visible = false;
+	}
 
-		console.log( marker );
-		console.log( lines );
-
-		// var toLineItem = findLineItemByMarkerID( lines, marker.key );
-		// if ( toLineItem ) toLineItem.visible = false;
+	function markersDragendHandler(deviceType, marker, eventName, args){
+		var lines = $scope[ deviceType + "Lines"].lines;
+		var line = getLineItemByDeviceID( lines, marker.model.id );
+		if ( !line ) return;
+		var location = {
+			latitude: marker.getPosition().lat(),
+			longitude: marker.getPosition().lng()
+		}
+		line.path[1] = location;
+		if ( !line.visible ) line.visible = true;
 	}
 
 	$scope.map = {
@@ -79,7 +94,14 @@ angular.module("myGMap")
       latitude: 41,
       longitude: -74
     },
-    zoom: 10
+    zoom: 10,
+		events: {
+			tilesloaded: function(map) {
+				$scope.$apply(function() {
+					console.log( "map instance --> ", map );
+				});
+			}
+		}
   };
 
   // server marker
@@ -112,6 +134,9 @@ angular.module("myGMap")
 		events:{
 				drag: function(marker, eventName, args){
 					markersDragHandler( "deviceA", marker, eventName, args );
+				},
+				dragend: function(marker, eventName, args){
+					markersDragendHandler( "deviceA", marker, eventName, args );
 				}
 		}
 	};
@@ -122,6 +147,9 @@ angular.module("myGMap")
 		events:{
 			drag: function(marker, eventName, args){
 				markersDragHandler( "deviceB", marker, eventName, args );
+			},
+			dragend: function(marker, eventName, args){
+				markersDragendHandler( "deviceB", marker, eventName, args );
 			}
 		}
 	};
@@ -141,8 +169,5 @@ angular.module("myGMap")
 		createMarkers( data[i] );
 		createLines( data[i] );
 	};
-
-	// ------------------------------------------------------------
-	console.log( "scope == ", $scope );
 
 }]);

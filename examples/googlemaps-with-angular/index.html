@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>NewFour @ test of </title>
+	<title>googlemaps-with-angular</title>
     <link rel="stylesheet" href="styles/mystyle.css">
     <script src="../../libs/angular.js"></script>
     <script src="../../libs/lodash.js"></script>
@@ -11,7 +11,7 @@
 </head>
 <body ng-app="myGMap">
 	<div class="myContainer" ng-controller="myCtrl">
-		<ui-gmap-google-map center='map.center' zoom='map.zoom'>
+		<ui-gmap-google-map center='map.center' zoom='map.zoom' events="map.events">
 
 			<!-- server marker -->
 			<ui-gmap-marker coords="serverMarker.coords"
@@ -53,7 +53,6 @@
 			                  fit="p.fit"
 			                  editable="p.editable"
 			                  draggable="p.draggable"></ui-gmap-polyline>
-
 
 		</ui-gmap-google-map>
 	</div>
