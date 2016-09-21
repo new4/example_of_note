@@ -160,12 +160,12 @@ function createMarkers(deviceData){
 
 // device data
 var data = [
-	{ deviceName: "A-1", deviceType: "deviceA", status: "managed", 	 id: 1, coords: { latitude: 41.3, longitude: -73.8 } },
+	{ deviceName: "A-1", deviceType: "deviceA", status: "managed", id: 1, coords: { latitude: 41.3, longitude: -73.8 } },
 	{ deviceName: "A-2", deviceType: "deviceA", status: "unmanaged", id: 2, coords: { latitude: 41.2, longitude: -73.4 } },
-	{ deviceName: "B-1", deviceType: "deviceB", status: "managed", 	 id: 3, coords: { latitude: 40.7, longitude: -73.8 } },
-	{ deviceName: "A-3", deviceType: "deviceA", status: "managed", 	 id: 4, coords: { latitude: 40.7, longitude: -74.2 } },
+	{ deviceName: "B-1", deviceType: "deviceB", status: "managed", id: 3, coords: { latitude: 40.7, longitude: -73.8 } },
+	{ deviceName: "A-3", deviceType: "deviceA", status: "managed", id: 4, coords: { latitude: 40.7, longitude: -74.2 } },
 	{ deviceName: "B-2", deviceType: "deviceB", status: "unmanaged", id: 5, coords: { latitude: 41,   longitude: -74.4 } },
-	{ deviceName: "A-4", deviceType: "deviceA", status: "managed", 	 id: 6, coords: { latitude: 41.3, longitude: -74.2 } }
+	{ deviceName: "A-4", deviceType: "deviceA", status: "managed", id: 6, coords: { latitude: 41.3, longitude: -74.2 } }
 ];
 
 // deviceAMarkers
